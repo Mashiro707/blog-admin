@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button icon="el-icon-plus" circle @click="createCategory"></el-button>
+    <el-button icon="el-icon-plus" circle @click="createCategory" />
     <el-table :data="categoryList">
       <el-table-column label="序号" width="50" type="index" />
       <el-table-column prop="name" label="名称" width="120" />
@@ -25,11 +25,11 @@
 <script>
 export default {
   method: {
-    createCategory(){
+    createCategory() {
       this.$prompt('请输入分类名称', '提示', {
         confirmButtonText: '确定',
-        cancelButtonText: '取消',
-      }).then(({value}) => {
+        cancelButtonText: '取消'
+      }).then(({ value }) => {
 
       })
     }
