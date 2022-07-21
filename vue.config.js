@@ -12,7 +12,7 @@ module.exports = {
     https: false,
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:50001/api',
+        target: 'http://127.0.0.1:8080/api',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''

@@ -9,7 +9,7 @@
       label-position="left"
     >
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">Login</h3>
       </div>
 
       <el-form-item prop="username">
@@ -53,7 +53,7 @@
         :loading="loading"
         type="primary"
         style="width: 100%; margin-bottom: 30px"
-        @click="handleLogin('loginForm')"
+        @click="handleLogin()"
       >Login</el-button>
     </el-form>
   </div>
@@ -67,7 +67,7 @@ export default {
   data() {
     return {
       loginForm: {
-        username: 'Mashiro',
+        username: 'admin',
         password: '123456'
       },
       loginRules: {
@@ -94,19 +94,19 @@ export default {
         this.$refs.password.focus()
       })
     },
-    handleLogin(loginForm) {
-      this.$refs[loginForm].validate((valid) => {
+    handleLogin() {
+      this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true
-          login(loginForm)
+          login(this.loginForm)
             .then((res) => {
-              if (res.data.status_code === 200) {
-                window.localStorage.setItem('token', res.data.data.token)
-                this.$store.commit('setUserInfo', res.data.data)
+              if (res.status_code === 200) {
+                window.localStorage.setItem('token', res.data.token)
+                this.$store.dispatch('user/setUserInfo', res.data)
                 this.$router.push('/dashboard')
-                this.msgSiccess(res.data.status_message)
+                this.msgSiccess(res.status_message)
               } else {
-                this.msgError(res.data.status_message)
+                this.msgError(res.status_message)
               }
               this.loading = false
             }
@@ -115,7 +115,7 @@ export default {
               this.loading = false
             })
         } else {
-          this.msgInfo('数据校验错误')
+          this.msgError('数据校验错误')
           return false
         }
       })

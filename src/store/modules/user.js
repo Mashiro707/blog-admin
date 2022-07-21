@@ -26,6 +26,12 @@ const actions = {
     commit('SET_NAME', userInfo.nick_name)
     commit('SET_AVATAR', userInfo.avatar)
     commit('SET_EMAIL', userInfo.email)
+  },
+  // clear user info when logout
+  logout({ commit }) {
+    commit('SET_NAME', '')
+    commit('SET_AVATAR', '')
+    commit('SET_EMAIL', '')
   }
 }
 
